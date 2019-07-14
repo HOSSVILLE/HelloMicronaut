@@ -46,7 +46,7 @@ dependencies {
 
 test.classpath += configurations.developmentOnly
 
-mainClassName = "hello.world.Application"
+mainClassName = "org.hoss.learn.micronaut.Application"
 // use JUnit 5 platform
 test {
     useJUnitPlatform()
