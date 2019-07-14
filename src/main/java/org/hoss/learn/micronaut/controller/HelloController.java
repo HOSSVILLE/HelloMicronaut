@@ -9,6 +9,6 @@ public class HelloController {
 
     @Get(produces = MediaType.APPLICATION_JSON)
     public String getGreeting() {
-        return "Hello World!";
+        return "Hello World from Micronaut!";
     }
 }
