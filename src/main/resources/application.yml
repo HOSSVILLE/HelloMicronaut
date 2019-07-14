@@ -1,3 +1,19 @@
 micronaut:
   application:
-    name: hello-world
+    name: hello-micronaut
+
+endpoints:
+  health:
+    enabled: true
+    sensitive: false
+    details-visible: ANONYMOUS
+
+
+consul:
+  client:
+    registration:
+      enabled: false
+      check:
+        http: true
+    defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"
+
