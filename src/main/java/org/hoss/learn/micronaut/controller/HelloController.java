@@ -7,7 +7,7 @@ import io.micronaut.http.annotation.Get;
 @Controller
 public class HelloController {
 
-    @Get(produces = MediaType.TEXT_PLAIN)
+    @Get(produces = MediaType.APPLICATION_JSON)
     public String getGreeting() {
         return "Hello World!";
     }
