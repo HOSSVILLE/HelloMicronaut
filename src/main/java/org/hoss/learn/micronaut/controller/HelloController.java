@@ -9,7 +9,7 @@ public class HelloController {
 
     public String me;
 
-    @Get(produces = MediaType.TEXT_PLAIN)
+    @Get(produces = MediaType.APPLICATION_JSON)
     public String getGreeting() {
         return "Hello World from Micronaut!";
     }
