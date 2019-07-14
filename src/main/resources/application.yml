@@ -7,6 +7,10 @@ endpoints:
     enabled: true
     sensitive: false
     details-visible: ANONYMOUS
+  info:
+      enable: true
+      sensitive: false
+      details-visible: ANONYMOUS
 
 
 consul:
