@@ -1,62 +1,40 @@
 plugins {
-    id "io.spring.dependency-management" version "1.0.6.RELEASE"
-    id "java"
-    id "net.ltgt.apt-idea" version "0.21"
-    id "com.github.johnrengelman.shadow" version "4.0.2"
-    id "application"
-    id "com.gorylenko.gradle-git-properties" version "2.0.0"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("io.micronaut.application") version "3.4.1"
 }
 
-
-
-version "0.1"
-group "hello.world"
+version = "0.1"
+group = "com.example"
 
 repositories {
     mavenCentral()
-    maven { url "https://jcenter.bintray.com" }
-}
-
-dependencyManagement {
-    imports {
-        mavenBom 'io.micronaut:micronaut-bom:3.5.3'
-    }
-}
-
-configurations {
-    // for dependencies that are needed for development only
-    developmentOnly 
 }
 
 dependencies {
-    annotationProcessor "io.micronaut:micronaut-inject-java"
-    annotationProcessor "io.micronaut:micronaut-validation"
-    compile "io.micronaut:micronaut-inject"
-    compile "io.micronaut:micronaut-validation"
-    compile "io.micronaut:micronaut-runtime"
-    compile "io.micronaut:micronaut-http-client"
-    compile "javax.annotation:javax.annotation-api"
-    compile "io.micronaut:micronaut-http-server-netty"
-    compile "io.micronaut:micronaut-management"
-    runtime "ch.qos.logback:logback-classic:1.2.3"
-    runtime "io.micronaut:micronaut-discovery-client"
-    testAnnotationProcessor "io.micronaut:micronaut-inject-java"
-    testCompile "junit:junit:4.12"
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-jackson-databind")
+    implementation("jakarta.annotation:jakarta.annotation-api")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    implementation("io.micronaut:micronaut-validation")
 
 }
 
-test.classpath += configurations.developmentOnly
 
-mainClassName = "org.hoss.learn.micronaut.Application"
-
-tasks.withType(JavaCompile){
-    options.encoding = "UTF-8"
-    options.compilerArgs.add('-parameters')
+application {
+    mainClass.set("com.example.Application")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("11")
+    targetCompatibility = JavaVersion.toVersion("11")
 }
 
-shadowJar {
-    mergeServiceFiles()
+graalvmNative.toolchainDetection = false
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.example.*")
+    }
 }
-
-run.classpath += configurations.developmentOnly
-run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
