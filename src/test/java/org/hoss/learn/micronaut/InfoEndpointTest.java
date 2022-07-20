@@ -41,22 +41,18 @@ public class InfoEndpointTest {
     @Test
     public void testGitComitInfoAppearsInJson() {
 
-        HttpRequest request = HttpRequest.GET("/info");
+        HttpRequest request = HttpRequest.GET("/");
 
-        HttpResponse<Map> rsp = client.toBlocking().exchange(request, Map.class);
+        HttpResponse<String> rsp = client.toBlocking().exchange(request, String.class);
 
         assertEquals(rsp.status().getCode(), 200);
 
-        Map json = rsp.body();
+        String message = rsp.body();
 
         then:
-        assertNotNull(json.get("git"));
-        assertNotNull(((Map) json.get("git")).get("commit"));
-        assertNotNull(((Map) ((Map) json.get("git")).get("commit")).get("message"));
-        assertNotNull(((Map) ((Map) json.get("git")).get("commit")).get("time"));
-        assertNotNull(((Map) ((Map) json.get("git")).get("commit")).get("id"));
-        assertNotNull(((Map) ((Map) json.get("git")).get("commit")).get("user"));
-        assertNotNull(((Map) json.get("git")).get("branch"));
+        assertNotNull(message);
+        assertEquals("Hello World from Micronaut!", message);
+        
     }
 
 }

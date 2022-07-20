@@ -5,7 +5,7 @@ plugins {
 
 version = "0.1"
 group = "org.hoss.learn.micronaut"
-
+mainClassName = "org.hoss.learn.micronaut.Application"
 repositories {
     mavenCentral()
 }
@@ -27,8 +27,8 @@ application {
     mainClass.set("org.hoss.learn.micronaut.Application")
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("11")
-    targetCompatibility = JavaVersion.toVersion("11")
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
 }
 
 graalvmNative.toolchainDetection = false
